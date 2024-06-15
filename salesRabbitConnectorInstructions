@@ -1,0 +1,77 @@
+Adding to the SalesRabbit Closer Install Form is easy, but not simple. Below are instructions on how to do so. Below the instructions is an example of how I would structure the URL if I had to repopulate a new pre-filled link into SalesRabbit.
+There's not really a reason you would need to completely restart, unless you're deleting and adding multiple new fields in the Install Form. If that doesn't make sense, then don't worry about it and just follow below.
+
+Adding Instructions:
+  1. Navigate to the Brighthouse Install Google Form editor (https://docs.google.com/forms/d/1tUzuaszyDlZ82QC7c9t5Jup-6e8fhJmZip4Fm2uMdQU/edit)
+  2. Click the bottom-most `Question` and click the `+` on the right to add a new Question.
+  3. Enter the name of your field, set the type, and any associated answers if it's multiple choice or drop-down
+  4. Click the three dots in the top right of the page and click `Get pre-filled link`
+  5. Scroll to the bottom of the new form that opened and fill out ONLY the last question that you just created. You can put anything here. Once answered, click `Submit`.
+  6. Click the new pop-up that says `Copy Link`
+  7. Your new link should look something like this: `https://docs.google.com/forms/d/e/1FAIpQLScnNeNM660BHRTaan4WjdMNDSW_8Lf7tLzEvnaZ-hC0h57zeA/viewform?usp=pp_url&entry.2072538458=ANSWER`
+  8. Paste your new link in a text box of some sort so you can see it. We need to keep just the last part, so you can delete everything other than the `&entry.2072538458=ANSWER`. Once this is isolated, save it somewhere you won't lose it.
+  9. Now we need to create this same `Question` field in SalesRabbit.
+    a. Go to this link: `https://web.salesrabbit.com/lgc/custom-fields`
+    b. On the left panel, click `Text` or `Dropdown`, scroll to the bottom and set your question up again
+    c. Once completed, you will see a `code` name for your question in small italics on the right, under the `X`.
+    d. This is how SalesRabbit will know which question to answer in your Google Form.
+  10. Go back to your `&entry.2072538458=ANSWER` note, and delete the text after the `=`.
+  11. It should look like this now: `&entry.2072538458=`
+  12. Now we need to format it to tell SalesRabbit how to read it. After the `=`, put the following: {lead.customFields.}
+  13. It should look like this now: &entry.2072538458={lead.customFields.}
+  14. All that's left to format is to put in the `code` name of your question after the last period.
+  15. Again, you can find your `code` name in small italics on your question in SalesRabbit.
+  15. Append your `code` name like this: &entry.2072538458={lead.customFields.codeNameHere}
+  16. Copy your entire note that looks similar to the one above (just with different numbers and the name at the end is different)
+  17. Go to this link: `https://web.salesrabbit.com/srs/settings/connectors`
+  18. Click the three dots on `Closing Install Form` and select the pencil to edit the connector.
+  19. In the URL section, scroll all the way down and paste your note at the end. There should be no spaces in your note and no spaces between the last `}` and your `&`
+  20. Click Save. If done correctly, it will close and you have successfully updated it.
+
+
+Structure Help:
+  1. Open your URL in VSCode by starting a new .txt file and pasting your URL.
+  2. Highlight anywhere it says `&entry`
+  3. Hold `CTRL + D` to select everywhere in the file this appears.
+  4. Hit the left arrow on your keyboard to place your cursor before the `&`.
+  5. Hit `ENTER` to create a new line between all of the entries to make reading the file easier.
+  6. Use this structure and the instructions above if you need to fully create a Form Connector.
+  7. To import this back into SalesRabbit, you can hightight anywhere it says `&entry` again, hold `CTRL + D` to select all, hit the left arrow key, then hit `BACKSPACE` one time to remove the exta line. You can copy this and import it now.
+  
+Structure Example:
+  Before:
+    https://docs.google.com/forms/d/e/1FAIpQLScnNeNM660BHRTaan4WjdMNDSW_8Lf7tLzEvnaZ-hC0h57zeA/viewform?usp=pp_url&entry.1567209844={lead.customFields.salesCloser}&entry.707937391={lead.customFields.salesSetter}&entry.1671151424={lead.customFields.closerPhoneNumber}&entry.2079011845={lead.firstName}%20{lead.lastName}&entry.1557212775={lead.street1}%20{lead.city}%20{lead.state}%20{lead.postalCode}&entry.1260130170={lead.phonePrimary}&entry.454205688={lead.email}&entry.622777232={lead.customFields.systemLayoutTool}&entry.1494551113={lead.customFields.systemSize}&entry.446317824={lead.customFields.netBatteryCapacity}&entry.2045326160={lead.customFields.systemProduction}&entry.2001292316={lead.customFields.annualConsumption}&entry.755120450={lead.customFields.moduleType}&entry.685385804={lead.customFields.moduleCount}&entry.2139764117={lead.customFields.batteryType}&entry.1962388002={lead.customFields.inverterType}&entry.353718590={lead.customFields.batteryCount}&entry.1512743257={lead.customFields.backup}&entry.927994266={lead.customFields.mPU}&entry.248019128={lead.customFields.addersAndPriceDontUseCommas}&entry.1797309428={lead.customFields.wiFiName}&entry.1206656414={lead.customFields.wiFiPassword}&entry.2056858475={lead.customFields.customerLanguage}&entry.1715157069={lead.customFields.netContractPrice}&entry.1245316056={lead.customFields.netPPW}&entry.890021973={lead.customFields.monthlySolarBill}&entry.1128052620={lead.customFields.contractSignedDate}&entry.1894911945={lead.customFields.escalator}&entry.1459136438={lead.customFields.ratePerKWh}&entry.2076470695={lead.customFields.financingPartner}&entry.2072538458={lead.customFields.ownershipType}
+  After:
+    https://docs.google.com/forms/d/e/1FAIpQLScnNeNM660BHRTaan4WjdMNDSW_8Lf7tLzEvnaZ-hC0h57zeA/viewform?usp=pp_url
+    &entry.1567209844={lead.customFields.salesCloser}
+    &entry.707937391={lead.customFields.salesSetter}
+    &entry.1671151424={lead.customFields.closerPhoneNumber}
+    &entry.2079011845={lead.firstName}%20{lead.lastName}
+    &entry.1557212775={lead.street1}%20{lead.city}%20{lead.state}%20{lead.postalCode}
+    &entry.1260130170={lead.phonePrimary}
+    &entry.454205688={lead.email}
+    &entry.622777232={lead.customFields.systemLayoutTool}
+    &entry.1494551113={lead.customFields.systemSize}
+    &entry.446317824={lead.customFields.netBatteryCapacity}
+    &entry.2045326160={lead.customFields.systemProduction}
+    &entry.2001292316={lead.customFields.annualConsumption}
+    &entry.755120450={lead.customFields.moduleType}
+    &entry.685385804={lead.customFields.moduleCount}
+    &entry.2139764117={lead.customFields.batteryType}
+    &entry.1962388002={lead.customFields.inverterType}
+    &entry.353718590={lead.customFields.batteryCount}
+    &entry.1512743257={lead.customFields.backup}
+    &entry.927994266={lead.customFields.mPU}
+    &entry.248019128={lead.customFields.addersAndPriceDontUseCommas}
+    &entry.1797309428={lead.customFields.wiFiName}
+    &entry.1206656414={lead.customFields.wiFiPassword}
+    &entry.2056858475={lead.customFields.customerLanguage}
+    &entry.1715157069={lead.customFields.netContractPrice}
+    &entry.1245316056={lead.customFields.netPPW}
+    &entry.890021973={lead.customFields.monthlySolarBill}
+    &entry.1128052620={lead.customFields.contractSignedDate}
+    &entry.1894911945={lead.customFields.escalator}
+    &entry.1459136438={lead.customFields.ratePerKWh}
+    &entry.2076470695={lead.customFields.financingPartner}
+    &entry.2072538458={lead.customFields.ownershipType}
+
